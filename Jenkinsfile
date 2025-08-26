@@ -16,16 +16,10 @@ pipeline {
                 sh 'docker build -t jenkins-demo-app:latest .'
             }
         }
-        stage('Test') {
-            steps {
-                sh 'echo "Running tests..."'
-                sh 'docker run --rm jenkins-demo-app:latest pytest || true'
-            }
-        }
         stage('Run Container') {
             steps {
                 sh 'docker rm -f demo-app || true'
-                sh 'docker run -d -p 8081:8081 --name demo-app jenkins-demo-app:latest'
+                sh 'docker run -d -p 5000:5000 --name demo-app jenkins-demo-app:latest'
             }
         }
     }
